@@ -1,0 +1,61 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+          <!-- Small boxes (Stat box) -->
+          <div class="row">
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h3>{{ all_participant_count }}</h3>
+
+                  <p>Total Participants</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="{% url 'manage_participant' %}" class="small-box-footer">+ d'info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            </div>
+            <!-- ./col -->
+          </div>
+          <!-- /.row -->
+          
+      </section>
+
+  {% endblock main_content %}
+
+  {% block custom_js %}
+
+  <script>
+    $(document).ready(function(){
+      
+
+      //-------------
+      //- PIE CHART -
+      //-------------
+      // Get context with jQuery - using jQuery's .get() method.
+      var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+      var pieData        = pieData;
+      var pieOptions     = {
+        maintainAspectRatio : false,
+        responsive : true,
+      }
+      //Create pie or douhnut chart
+      // You can switch between pie and douhnut using the method below.
+      var pieChart = new Chart(pieChartCanvas, {
+        type: 'pie',
+        data: pieData,
+        options: pieOptions      
+      })
+
+    })
+  </script>
+
+  {% endblock custom_js %}

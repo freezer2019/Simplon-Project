@@ -1,0 +1,88 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+    Editer Participant | #ID : {{ participant.id }}
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Editer Participant</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" method="POST" action="{% url 'edit_participant_save' %}">
+                        {% csrf_token %}
+
+                        
+                                {% comment %} Display Messages {% endcomment %}
+                                {% if messages %}
+                                <div class="form-group">
+                                <div class="col-12">
+                                    {% for message in messages %}
+                                    {% if message.tags == "error" %}
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% elif message.tags == "success" %}
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </div>
+                                {% endif %}
+                            
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Nom du participant </label>
+                                <input type="text" class="form-control" name="nom" value="{{ participant.nom }}">
+                                <input type="hidden" name="participant_id" value="{{ participant.id }}" />
+                            </div>
+                            <div class="form-group">
+                                <label>Prénom du participant </label>
+                                <input type="text" class="form-control" name="prenom" value="{{ participant.prenom }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Téléphone du participant </label>
+                                <input type="text" class="form-control" name="numero_de_telephone" value="{{ participant.numero_de_telephone }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Email du participant </label>
+                                <input type="text" class="form-control" name="email" value="{{ participant.email }}">
+                            </div>
+
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Modifier Participant</button>
+                        </div>
+                    </form>
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+  {% endblock main_content %}
